@@ -1,0 +1,183 @@
+$levels: (
+    0: 0px,
+    1: 5px,
+    2: 10px,
+    3: 15px,
+    4: 20px,
+    5: 30px,
+    auto: auto
+);
+
+$br-levels: (
+    0: 0px,
+    1: 3px,
+    2: 5px,
+    3: 10px,
+    4: 15px,
+    5: 20px,
+    circular: 50%
+);
+
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);
+
+@mixin do-property($name, $attributes, $value, $prev:()) {
+    &-#{$name}, &-#{$name}-h:hover {
+        @each $attr, $val in $prev {
+            #{$attr}: $val;
+        }
+        @each $attr in $attributes {
+            #{$attr}: $value;
+        }
+        
+    }
+
+    &-#{$name}-i {
+        @each $attr, $val in $prev {
+            #{$attr}: $val;
+        }
+        @each $attr in $attributes {
+            #{$attr}: $value !important;
+        }
+    }
+
+}
+
+@mixin level-property($name, $attr, $level-ar) {
+    @each $level, $val in $level-ar {
+        @include do-property(#{$name}-#{$level}, $attr, $val);     
+    }
+}
+
+@mixin borders {
+    @include level-property(br, border-radius , $br-levels);
+}
+
+@mixin margin {
+    @include level-property(m, margin , $levels);
+    @include level-property(ml, margin-left , $levels);
+    @include level-property(mr, margin-right , $levels);
+    @include level-property(mt, margin-top, $levels);
+    @include level-property(mb, margin-bottom , $levels);
+    @include level-property(mx, (margin-left, margin-right) , $levels);
+    @include level-property(my, (margin-top, margin-bottom) , $levels);
+}
+
+@mixin padding {
+    @include level-property(p, padding , $levels);
+    @include level-property(pl, padding-left , $levels);
+    @include level-property(pr, padding-right , $levels);
+    @include level-property(pt, padding-top, $levels);
+    @include level-property(pb, padding-bottom , $levels);
+    @include level-property(px, (padding-left, padding-right) , $levels);
+    @include level-property(py, (padding-top, padding-bottom) , $levels);
+}
+
+@mixin display {
+    &-flex {
+        @include do-property(column,flex-direction,column,(display: flex));
+        @include do-property(row,flex-direction,row,(display: flex));
+        @include do-property(row-r,flex-direction,row-reverse,(display: flex));
+        @include do-property(column-r,flex-direction,column-reverse,(display: flex));
+    }
+
+    @include do-property(grid,display,grid);
+
+    &-auto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    @include do-property(d-none,display,none);
+    @include do-property(d-block,display,block);
+    @include do-property(d-inline,display,inline);
+    @include do-property(d-iblock,display,inline-block);
+}
+
+
+@mixin alignment {
+
+    $lev: (
+        center: center,
+        end: flex-end,
+        start: flex-start,
+        between: space-between,
+        around: space-around,
+        base: baseline,
+        even: space-evenly
+    );
+
+    @include level-property(jc,justify-content,$lev);
+    @include level-property(ai,align-items,$lev);
+}
+
+@mixin position {
+    $lev: (
+        rel: relative,
+        abs: absolute,
+        fixed: fixed,
+        sticky: sticky
+    );
+
+    @include level-property(ps, position, $lev);
+}
+
+@mixin width-height {
+    $lev: (
+        100: 100%,
+        80: 80%,
+        70: 70%,
+        60: 60%,
+        50: 50%,
+        40: 40%,
+        30: 30%,
+        20: 20%,
+        10: 10%,
+        0: 0,
+        fit: fit-content
+    );
+
+    @include level-property(w, width, $lev);
+    @include level-property(h, height, $lev);
+}
+
+@mixin base {
+    @include borders;
+    @include margin;
+    @include padding;
+    @include display;
+    @include alignment;
+    @include position;
+    @include width-height;
+}
+
+.ln {
+    @include base;
+    &-custom-bg {
+        --ln-custom-bg: inherit;
+        background: var(--ln-custom-bg);
+    }
+}
+
+:root {
+    @each $bt, $val in $breakpoints {
+        --ln-bp-#{$bt}: $val;
+    } 
+}
+
+@each $bt, $val in $breakpoints {
+    @media (max-width: $val) {
+        .ln-#{$bt} {
+            @include base;
+        }
+
+        .ln-custom-bg {
+            --ln-custom-bg: var(--ln-#{$bt}-c);
+        }
+    }
+}

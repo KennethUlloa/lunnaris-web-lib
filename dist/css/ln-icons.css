@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Lunaris-media-icons';
+    src:
+      url('./font/Lunaris-media-icons.ttf') format('truetype'),
+      url('./font/Lunaris-media-icons.woff') format('woff'),
+      url('./font/Lunaris-media-icons.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.ln-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'Lunaris-media-icons' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: 1em;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ln-icon.ln-unlock:before {content: "\e900";}
+.ln-icon.ln-lock:before {content: "\e901";}
+.ln-icon.ln-info:before {content: "\e902";}
+.ln-icon.ln-help:before {content: "\e903";}
+.ln-icon.ln-volume-off:before {content: "\e904";}
+.ln-icon.ln-volume:before {content: "\e905";}
+.ln-icon.ln-person:before {content: "\e906";}
+.ln-icon.ln-settings:before {content: "\e907";}
+.ln-icon.ln-visibility-off:before {content: "\e908";}
+.ln-icon.ln-visibility:before {content: "\e909";}
+.ln-icon.ln-search:before {content: "\e90a";}
+.ln-icon.ln-fullscreen:before {content: "\e90b";}
+.ln-icon.ln-close-fullscreen:before {content: "\e90c";}
+.ln-icon.ln-fast-rewind:before {content: "\e90d";}
+.ln-icon.ln-fast-forward:before {content: "\e90e";}
+.ln-icon.ln-stop:before {content: "\e90f";}
+.ln-icon.ln-pause:before {content: "\e910";}
+.ln-icon.ln-play:before {content: "\e911";}
+
+.ln-icon.ln-sm {font-size: 22px;}
+.ln-icon.ln-smx {font-size: 32px;}
+.ln-icon.ln-md {font-size: 42px;}
+.ln-icon.ln-mdx {font-size: 52px;}
+.ln-icon.ln-lg {font-size: 62px;}
+.ln-icon.ln-lgx {font-size: 72px;}
+

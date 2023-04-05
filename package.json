@@ -1,0 +1,22 @@
+{
+  "name": "lunnaris-web-components-node",
+  "version": "1.0.0",
+  "description": "Web library to be reused",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "js": "tsc",
+    "copy": "copyfiles -a -u 1 ./src/css/font/* ./dist/",
+    "scss": "sass src/css",
+    "min-css": "css-minify -d src/css -o dist/css",
+    "build": "npm run js & npm run scss & npm run min-css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "css-minify": "^2.0.0",
+    "sass": "^1.60.0",
+    "typescript": "^5.0.3"
+  }
+}

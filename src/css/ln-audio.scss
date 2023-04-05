@@ -1,0 +1,101 @@
+@use 'basis';
+
+:root {
+    @include basis.progressbar-attr;
+}
+
+@mixin centered-flex($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: center;
+}
+
+.ln-audio-container {
+    @include centered-flex(column);
+    padding: 15px;
+    background-color: rgb(33, 33, 33);
+    border-radius: 5px;
+    color: rgb(237, 233, 233);
+}
+
+.ln-audio-controls {
+    @include centered-flex;
+    width: 100%;
+}
+
+.ln-audio-cover-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    background:rgb(60, 61, 62);
+    @include centered-flex;
+}
+
+.ln-audio-btn {
+    @include centered-flex;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 10px;
+    color: rgb(237, 233, 233);
+}
+
+.ln-time-view {margin-left: 5px; margin-right: 5px;}
+
+.ln-hover-bar {
+    @include centered-flex;
+    position: relative;
+}
+
+.ln-background {
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgb(33, 33, 33);
+    position: absolute;
+    left: 100%;
+    z-index: 1000000000;
+}
+
+.ln-hover-bar {
+    .ln-background{
+        width: 0px;
+        opacity: 0;
+        min-width: 0;
+        transition: opacity .2s, width .3s ;
+    }
+    .thumb::after {
+        width: 0;
+        height: 0;
+    }
+}
+
+.ln-hover-bar:hover {
+    .ln-background {
+        width: 100px;
+        
+        opacity: 1;
+    } 
+    .thumb::after {
+        width: var(--ln-btn-width);
+        height: var(--ln-btn-width);
+    }
+}
+
+.ln-audio-info {
+    @include centered-flex(column);
+}
+
+.ln-pill-container {
+    --n-pills: 10;
+    @include centered-flex();
+}
+
+.ln-pill-up {
+    width: calc(100%/var(--n-pills));
+    height: 100%;
+    border-width: 2px;
+    border-color: lightgray;
+
+
+}
+

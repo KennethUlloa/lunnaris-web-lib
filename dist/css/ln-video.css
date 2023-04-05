@@ -1,0 +1,195 @@
+:root {
+    --ln-progress-bg: rgba(138, 138, 138, 0.7);
+    --ln-progress-thumb-bg: white;
+    --ln-progress-l-color: rgb(83, 51, 198);
+    --ln-progress-r-color: rgb(188, 75, 192);
+    --ln-progress-bg-main: linear-gradient(to right, var(--ln-progress-l-color), var(--ln-progress-r-color));
+    --ln-progress-br-radius: 10px;
+    --ln-btn-color: white;
+}
+
+.ln-video-container, .ln-video-container * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.ln-video-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.ln-video-container video {
+    width: 100%;
+    height: 100%;
+}
+
+.ln-controls {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top, black, transparent);
+    bottom: 0;
+    z-index: 10000000 !important;
+    transition: transform .3s;
+}
+
+.ln-controls.initial {transform: translateY(100%);}
+
+.ln-controls:hover {
+    transform: translateY(0);
+    cursor: default;
+}
+
+.ln-progressbar {
+    --ln-progressbar-value: 0;
+    content: "";
+    position: relative;
+    width: 100%;
+    min-width: 10px;
+    height: 5px;
+    background: var(--ln-progress-bg);
+    display: flex;
+    border-radius: var(--ln-progress-br-radius);
+    transition: height .3s;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.ln-progressbar:hover {height: 8px;}
+
+.ln-progressbar::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: calc(var(--ln-progressbar-value) * 100%);
+    height: 100%;
+    background: var(--ln-progress-bg-main);
+    border-radius: var(--ln-progress-br-radius);
+}
+
+.ln-progressbar.thumb::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ln-progress-thumb-bg);
+    border: 3px solid var(--ln-progress-r-color);
+    top: 50%;
+    left: calc(var(--ln-progressbar-value)*100%);
+    transform: translate(-50%,-50%);
+    
+}
+
+.ln-btn { 
+    background: transparent; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+*:not(.ln-btn.end) + .ln-btn.end{
+    margin-left: auto;
+}
+
+.ln-btn.midde {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ln-btn * {color: white}
+
+.ln-time-view {color: white}
+
+.ln-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: unset;
+    gap: 5px;
+}
+
+.ln-progressbar.vol {
+    width: 0px;
+    opacity: 0;
+    transition: width .3s, opacity .2s;
+}
+
+.ln-vol-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.ln-vol-container:hover .ln-progressbar.vol {
+    width: 100px;
+    opacity: 1;
+}
+
+.no-cursor {cursor: none;}
+
+.ln-progressbar.vid .ln-time-view {
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px 10px;
+    position: absolute;
+    border-radius: 15px;
+    bottom: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.ln-progressbar.vid:hover .ln-time-view {
+    opacity: 1;
+}
+
+.ln-popup {
+    position: relative;
+}
+
+.ln-popup:hover::after {
+    position: absolute;
+    content: attr(data-ln-popup);
+    padding: 5px;
+    border: 5px;
+    color: white;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.ln-popup.top:hover::after {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+}
+
+.ln-popup.left:hover::after {
+    left: initial;
+    right: 100%;
+    transform: translateX(0);
+}
+
+.ln-popup.right:hover::after {
+    right: initial;
+    left: 100%;
+    transform: translateX(0);
+}
+
+.ln-popup.bottom:hover::after {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
+}

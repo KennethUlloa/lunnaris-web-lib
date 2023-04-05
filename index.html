@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/ln-audio.css">
+    <link rel="stylesheet" href="src/css/ln-icons.css">
+    <script src="dist/js/ln-functions.js"></script>
+    
+    <title>Document</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .debug {
+            border: 1px solid red;
+        }
+
+        .d-none {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ln-audio-container">
+        <audio src="Alpha LoFi.mp3"></audio>
+        
+        <div class="ln-audio-info" id="audio-info">
+            <div class="ln-audio-cover-img">
+                <i class="ln-icon ln-disc ln-mdx"></i>
+            </div>
+            <h4>Title</h4>
+            <h6>Unknown</h6>
+        </div>
+        <div class="ln-audio-controls">
+            <button class="ln-audio-btn" onclick="audio.play()" id="playBtn">
+                <i class="ln-icon ln-play ln-sm"></i>
+            </button>
+            <div class="ln-hover-bar">
+                <button class="ln-audio-btn">
+                    <i class="ln-icon ln-volume ln-sm"></i>
+                </button>
+                <div class="ln-background">
+                    <div class="ln-progressbar thumb" onclick="handleInput(event)"></div>
+                </div>
+            </div>
+            <div class="ln-time-view" id="currentTime">00:00</div>
+            <div class="ln-progressbar thumb" onclick="handleInput(event)" id="audiobar"></div>
+            <div class="ln-time-view" id="finalTime">00:00</div>
+            <button class="ln-audio-btn" onclick="toggleClass('#audio-info', 'd-none')">
+                <i class="ln-icon ln-art-cover ln-sm"></i>
+            </button>
+        </div>
+    </div>
+    <script>
+        let audio = document.querySelector('audio');
+        let playBtn = document.querySelector('#playBtn');
+        let audiobar = document.querySelector('#audiobar');
+        audio.addEventListener('timeupdate', () => {
+            const percent = audio.currentTime/audio.duration;
+            audiobar.style.setProperty('--ln-progressbar-value', percent);
+            document.querySelector('#currentTime').textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            document.querySelector('#finalTime').textContent = formatTime(audio.duration);
+        })
+
+        audiobar.addEventListener('click', (e) => {
+            let offset = getRelativeOffset(e);
+            audio.currentTime = offset * audio.duration;
+        })
+        let shouldPlay = true;
+        function togglePlay() {
+            if(shouldPlay) {
+                audio.play();
+            }else {
+                audio.pause();
+            }
+            shouldPlay = audio.paused;
+            playBtn.querySelector('.ln-icon').classList.toggle('ln-play', audio.paused);
+            playBtn.querySelector('.ln-icon').classList.toggle('ln-pause', !audio.paused);
+        }
+
+        playBtn.addEventListener('click', togglePlay);
+
+    </script>
+</body>
+</html>
