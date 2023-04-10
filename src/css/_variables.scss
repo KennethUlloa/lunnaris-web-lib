@@ -1,0 +1,27 @@
+$levels: (
+    0: 0px,
+    1: 5px,
+    2: 10px,
+    3: 15px,
+    4: 20px,
+    5: 30px,
+    auto: auto
+);
+
+$br-levels: (
+    0: 0px,
+    1: 3px,
+    2: 5px,
+    3: 10px,
+    4: 15px,
+    5: 20px,
+    circular: 50%
+);
+
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);

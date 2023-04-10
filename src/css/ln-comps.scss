@@ -1,0 +1,155 @@
+@use 'variables' as v;
+@use "sass:map";
+
+$nav-item-hover-width: 3px;
+
+:root {
+    --ln-menu-item-selected: red;
+    @each $bt, $val in v.$breakpoints {
+        --ln-bp-#{$bt}: #{$val};
+    }
+}
+
+.ln {
+    &-nav {
+        display: flex;
+        padding: map.get(v.$levels, 1);
+
+        &-item {
+            padding: map-get($map: v.$levels, $key: 1);
+            position: relative;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            &:hover::after {
+                content: "";
+                position: absolute;
+                height: $nav-item-hover-width;
+                width: 100%;
+                left:0;
+                bottom: 0;
+                background: var(--ln-menu-item-selected);
+            }
+        }
+
+        &-main-item {
+            padding: map-get($map: v.$levels, $key: 1);
+        }
+        
+
+        &-item-list {
+            display: flex;
+            list-style: none;
+        }
+
+        &-toggle-btn {
+            display: none;
+            position: absolute;
+            background: transparent;
+            align-items: center;
+            justify-content: center;
+            top: map-get($map: v.$levels, $key: 1);
+            right: map-get($map: v.$levels, $key: 1);
+        }
+    }
+    
+    &-initial {
+        display: flex;
+    }
+}
+
+.ln-toggle-btn {
+    -webkit-appearance: none;
+    width: 3em;
+    height: 1.5em;
+    border-radius: 1.5em;
+    background-color: rgb(190, 190, 194);
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+
+    &::after {
+        position: absolute;
+        content: "";
+        height: calc(1.5em - 4px);
+        width: calc(1.5em - 4px);
+        left: 2px;
+        background-color: white;
+        border-radius: 1.5em;
+        box-sizing: border-box;
+    }
+
+    &:checked {
+        background: var(--ln-progress-bg-main);
+    }
+
+    &:checked::after {
+        left: unset;
+        right: 2px;
+    }
+
+}
+
+@media (max-width: map-get($map: v.$breakpoints, $key: sm)) {
+    .ln-nav {
+        flex-direction: column;
+        &-item-list {
+            display: none;
+            flex-direction: column;
+            &.ln-initial {
+                display: flex;
+            }
+        }
+
+        &-toggle-btn {
+            display: flex;
+        }
+
+        &-item:hover::after {
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: $nav-item-hover-width;
+        }
+
+        &.iconified {
+            flex-direction: row;
+
+            .ln-nav-item-list {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+
+            .ln-nav-item {
+                .ln-nav-item-desc {
+                    display: none;
+                } 
+            }
+
+            .ln-nav-item:hover {
+                &::after {
+                    top: initial;
+                    bottom: 0;
+                    left: 0;
+                    height: $nav-item-hover-width;
+                    width: 100%;
+                }
+
+                .ln-nav-item-desc {
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: flex;
+                    background-color: black;
+                    color: white;
+                    padding: 3px;
+                }
+            }
+                
+        }
+    }
+}

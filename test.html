@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="src/css/ln-comps.css">
+    <link rel="stylesheet" href="src/css/ln-icons.css">
+    <script src="dist/js/ln-autoload.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <header style="position: relative;">
+        <nav class="ln-nav iconified">
+            <h2 class="ln-nav-main-item">Hellow</h2>
+            <ul class="ln-nav-item-list">
+                <li class="ln-nav-item">
+                    <i class="ln-icon ln-home-filled ln-smx ln-nav-item-icon"></i>
+                    <span class="ln-nav-item-desc">Home</span>
+                </li>
+                <li class="ln-nav-item">
+                    <i class="ln-icon ln-search ln-smx ln-nav-item-icon"></i>
+                    <span class="ln-nav-item-desc">Search</span>
+                </li>
+                <li class="ln-nav-item">
+                    <i class="ln-icon ln-settings ln-smx founder"></i>
+                    <span class="ln-nav-item-desc">Settings</span>
+                </li>
+            </ul>
+        </nav>
+        <button class="ln-nav-toggle-btn" data-ln-target=".ln-nav-item-list" data-ln-toggle="ln-initial">
+            <i class="ln-icon ln-menu ln-sm"></i>
+        </button>
+    </header>
+    <main>
+        <form action="" id="form">
+            <div>
+                <label for="">Recordarme</label>
+                <input type="checkbox" name="op" class="ln-toggle-btn">
+            </div>
+            <input type="submit" value="Send">
+        </form>
+    </main>
+    <script>
+        let form = document.querySelector('#form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            var url = new URLSearchParams(new FormData(form));
+            console.log(url.toString());
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+:root {
+  --ln-menu-item-selected: red;
+  --ln-bp-sm: 576px;
+  --ln-bp-md: 768px;
+  --ln-bp-lg: 992px;
+  --ln-bp-xl: 1200px;
+  --ln-bp-xxl: 1400px;
+}
+
+.ln-nav {
+  display: flex;
+  padding: 5px;
+}
+.ln-nav-item {
+  padding: 5px;
+  position: relative;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.ln-nav-item:hover::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: var(--ln-menu-item-selected);
+}
+.ln-nav-main-item {
+  padding: 5px;
+}
+.ln-nav-item-list {
+  display: flex;
+  list-style: none;
+}
+.ln-nav-toggle-btn {
+  display: none;
+  position: absolute;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  top: 5px;
+  right: 5px;
+}
+.ln-initial {
+  display: flex;
+}
+
+.ln-toggle-btn {
+  -webkit-appearance: none;
+  width: 3em;
+  height: 1.5em;
+  border-radius: 1.5em;
+  background-color: rgb(190, 190, 194);
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+}
+.ln-toggle-btn::after {
+  position: absolute;
+  content: "";
+  height: calc(1.5em - 4px);
+  width: calc(1.5em - 4px);
+  left: 2px;
+  background-color: white;
+  border-radius: 1.5em;
+  box-sizing: border-box;
+}
+.ln-toggle-btn:checked {
+  background: var(--ln-progress-bg-main);
+}
+.ln-toggle-btn:checked::after {
+  left: unset;
+  right: 2px;
+}
+
+@media (max-width: 576px) {
+  .ln-nav {
+    flex-direction: column;
+  }
+  .ln-nav-item-list {
+    display: none;
+    flex-direction: column;
+  }
+  .ln-nav-item-list.ln-initial {
+    display: flex;
+  }
+  .ln-nav-toggle-btn {
+    display: flex;
+  }
+  .ln-nav-item:hover::after {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+  }
+  .ln-nav.iconified {
+    flex-direction: row;
+  }
+  .ln-nav.iconified .ln-nav-item-list {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .ln-nav.iconified .ln-nav-item .ln-nav-item-desc {
+    display: none;
+  }
+  .ln-nav.iconified .ln-nav-item:hover::after {
+    top: initial;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+  }
+  .ln-nav.iconified .ln-nav-item:hover .ln-nav-item-desc {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: 3px;
+  }
+}
+
+/*# sourceMappingURL=ln-comps.css.map */

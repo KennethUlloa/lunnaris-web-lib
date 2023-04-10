@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/ln-audio.css">
     <link rel="stylesheet" href="src/css/ln-icons.css">
+    <link rel="stylesheet" href="dist/css/ln-video.css">
     <script src="dist/js/ln-functions.js"></script>
     
     <title>Document</title>
@@ -56,6 +57,9 @@
             </button>
         </div>
     </div>
+    <div id="video-player">
+
+    </div>
     <script>
         let audio = document.querySelector('audio');
         let playBtn = document.querySelector('#playBtn');
@@ -88,6 +92,10 @@
 
         playBtn.addEventListener('click', togglePlay);
 
+    </script>
+    <script src="dist/js/ln-video.js"></script>
+    <script>
+        document.querySelector("#video-player").appendChild(VideoPlayer('http://127.0.0.1:80/video/the_batman'));
     </script>
 </body>
 </html>
