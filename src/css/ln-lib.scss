@@ -136,7 +136,7 @@ $breakpoints: v.$breakpoints;
 
 
     @include level-property(grid-col, grid-template-columns, $lev);
-    @include level-property(cols, grid-template-columns, $lev2);
+    @include level-property(cols, grid-column, $lev2);
 
 }
 
