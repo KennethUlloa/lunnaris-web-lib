@@ -25,3 +25,15 @@ $breakpoints: (
     xl: 1200px,
     xxl: 1400px
 );
+
+@mixin progressbar-attr {
+    --ln-progress-bg: rgba(138, 138, 138, 0.7);
+    --ln-progress-thumb-bg: white;
+    --ln-progress-l-color: rgb(83, 51, 198);
+    --ln-progress-r-color: rgb(188, 75, 192);
+    --ln-progress-bg-main: linear-gradient(to right, var(--ln-progress-l-color), var(--ln-progress-r-color));
+    --ln-progress-br-radius: 10px;
+    --ln-btn-color: white;
+    --ln-btn-width: 10px;
+    --ln-toggle-bg: linear-gradient(to right, var(--ln-progress-l-color), var(--ln-progress-r-color));
+}

@@ -13,6 +13,44 @@
             margin: 0;
             padding: 0;
         }
+
+        :root {
+            --ln-toggle-bg: rgb(60, 147, 76) !important;
+        }
+
+        .ln-validated-input > input {
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid rgb(60, 147, 76);
+            outline: none;
+        }
+
+        .ln-validated-input > input:focus {
+            outline: blue;
+        }
+
+        .ln-validated-input > input:not(:valid) {
+            border: 2px solid var(--ln-invalid);
+        }
+
+        .ln-validated-input > input:valid + .ln-validated-msg {
+            display: none;
+        }
+
+        .ln-validated-input {
+            --ln-invalid: rgb(222, 120, 120);
+            --ln-see: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ln-validated-msg {
+            color: var(--ln-invalid);
+        }
+        
+
+
     </style>
 </head>
 <body>
@@ -39,11 +77,20 @@
         </button>
     </header>
     <main>
-        <form action="" id="form">
-            <div>
+        <form action="" id="form" style="margin: 5px;">
+            <div style="display: flex;">
                 <label for="">Recordarme</label>
-                <input type="checkbox" name="op" class="ln-toggle-btn">
+                <input type="checkbox" name="op" class="ln-toggle-btn" style="font-size: 10px;">
             </div>
+            <div class="ln-validated-input">
+                <input type="email" name="mail" placeholder="ejemplo@correo.com" required>
+                <div class="ln-validated-msg">Correo inválido</div>
+            </div>
+            <div class="ln-validated-input">
+                <input type="email" name="mail2" placeholder="ejemplo@correo.com" required value="email@gmail.com">
+                <div class="ln-validated-msg">Correo inválido</div>
+            </div>
+            <input type="checkbox" name="op2" class="ln-checkbox" style="font-size: 10px;">
             <input type="submit" value="Send">
         </form>
     </main>

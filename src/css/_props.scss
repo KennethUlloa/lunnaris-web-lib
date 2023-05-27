@@ -1,0 +1,26 @@
+@mixin do-property($name, $attributes, $value, $prev:(), $times: 1) {
+    &-#{$name}, &-#{$name}-h:hover {
+        @each $attr, $val in $prev {
+            #{$attr}: $val;
+        }
+        @each $attr in $attributes {
+            #{$attr}: $value;
+        }
+        
+    }
+
+    &-#{$name}-i {
+        @each $attr, $val in $prev {
+            #{$attr}: $val;
+        }
+        @each $attr in $attributes {
+            #{$attr}: $value !important;
+        }
+    }
+}
+
+@mixin level-property($name, $attr, $level-ar) {
+    @each $level, $val in $level-ar {
+        @include do-property(#{$name}-#{$level}, $attr, $val);     
+    }
+}

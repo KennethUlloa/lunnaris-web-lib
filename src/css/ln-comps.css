@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --ln-menu-item-selected: red;
   --ln-bp-sm: 576px;
@@ -5,6 +6,15 @@
   --ln-bp-lg: 992px;
   --ln-bp-xl: 1200px;
   --ln-bp-xxl: 1400px;
+  --ln-progress-bg: rgba(138, 138, 138, 0.7);
+  --ln-progress-thumb-bg: white;
+  --ln-progress-l-color: rgb(83, 51, 198);
+  --ln-progress-r-color: rgb(188, 75, 192);
+  --ln-progress-bg-main: linear-gradient(to right, var(--ln-progress-l-color), var(--ln-progress-r-color));
+  --ln-progress-br-radius: 10px;
+  --ln-btn-color: white;
+  --ln-btn-width: 10px;
+  --ln-toggle-bg: linear-gradient(to right, var(--ln-progress-l-color), var(--ln-progress-r-color));
 }
 
 .ln-nav {
@@ -58,23 +68,58 @@
   display: flex;
   box-sizing: border-box;
   align-items: center;
+  transition: background 0.3s;
 }
 .ln-toggle-btn::after {
   position: absolute;
   content: "";
-  height: calc(1.5em - 4px);
-  width: calc(1.5em - 4px);
-  left: 2px;
+  height: 1.2em;
+  width: 1.2em;
+  left: 0.2em;
   background-color: white;
   border-radius: 1.5em;
   box-sizing: border-box;
 }
 .ln-toggle-btn:checked {
-  background: var(--ln-progress-bg-main);
+  background: var(--ln-toggle-bg);
 }
 .ln-toggle-btn:checked::after {
   left: unset;
-  right: 2px;
+  right: 0.2em;
+}
+
+.ln-checkbox {
+  -webkit-appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 0.5em;
+  background-color: rgb(190, 190, 194);
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  transition: background 0.3s;
+}
+.ln-checkbox::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: white;
+}
+.ln-checkbox:checked {
+  background: var(--ln-toggle-bg);
+}
+.ln-checkbox:checked::after {
+  content: "✔";
 }
 
 @media (max-width: 576px) {

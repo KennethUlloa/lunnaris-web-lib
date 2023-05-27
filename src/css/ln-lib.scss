@@ -1,36 +1,9 @@
 @use 'variables' as v;
+@import 'props';
 
 $levels: v.$levels;
 $br-levels: v.$br-levels;
 $breakpoints: v.$breakpoints;
-
-@mixin do-property($name, $attributes, $value, $prev:()) {
-    &-#{$name}, &-#{$name}-h:hover {
-        @each $attr, $val in $prev {
-            #{$attr}: $val;
-        }
-        @each $attr in $attributes {
-            #{$attr}: $value;
-        }
-        
-    }
-
-    &-#{$name}-i {
-        @each $attr, $val in $prev {
-            #{$attr}: $val;
-        }
-        @each $attr in $attributes {
-            #{$attr}: $value !important;
-        }
-    }
-
-}
-
-@mixin level-property($name, $attr, $level-ar) {
-    @each $level, $val in $level-ar {
-        @include do-property(#{$name}-#{$level}, $attr, $val);     
-    }
-}
 
 @mixin borders {
     @include level-property(br, border-radius , $br-levels);
@@ -105,6 +78,10 @@ $breakpoints: v.$breakpoints;
     @include level-property(ps, position, $lev);
 }
 
+@mixin gap {
+    @include level-property(gap, gap, $levels);
+}
+
 @mixin width-height {
     $lev: (
         100: 100%,
@@ -124,6 +101,45 @@ $breakpoints: v.$breakpoints;
     @include level-property(h, height, $lev);
 }
 
+
+@mixin grid {
+    $lev: (
+        1: repeat(1, 1fr),
+        2: repeat(2, 1fr),
+        3: repeat(3, 1fr),
+        4: repeat(4, 1fr),
+        5: repeat(5, 1fr),
+        6: repeat(6, 1fr),
+        7: repeat(7, 1fr),
+        8: repeat(8, 1fr),
+        9: repeat(9, 1fr),
+        10: repeat(10, 1fr),
+        11: repeat(11, 1fr),
+        12: repeat(12, 1fr)
+    );
+
+    $lev2: (
+        1: span 1,
+        2: span 2,
+        3: span 3,
+        4: span 4,
+        5: span 5,
+        6: span 6,
+        7: span 7,
+        8: span 8,
+        9: span 9,
+        10: span 10,
+        11: span 11,
+        12: span 12
+    );
+
+
+
+    @include level-property(grid-col, grid-template-columns, $lev);
+    @include level-property(cols, grid-template-columns, $lev2);
+
+}
+
 @mixin base {
     @include borders;
     @include margin;
@@ -132,6 +148,8 @@ $breakpoints: v.$breakpoints;
     @include alignment;
     @include position;
     @include width-height;
+    @include gap;
+    @include grid;
 }
 
 .ln {
@@ -144,7 +162,7 @@ $breakpoints: v.$breakpoints;
 
 :root {
     @each $bt, $val in $breakpoints {
-        --ln-bp-#{$bt}: $val;
+        --ln-bp-#{$bt}: #{$val};
     } 
 }
 
